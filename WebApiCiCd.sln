@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiCiCd", "WebApiCiCd.csproj", "{156C2E68-8922-4F03-AF56-08E33AA55593}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{156C2E68-8922-4F03-AF56-08E33AA55593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{156C2E68-8922-4F03-AF56-08E33AA55593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{156C2E68-8922-4F03-AF56-08E33AA55593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{156C2E68-8922-4F03-AF56-08E33AA55593}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
