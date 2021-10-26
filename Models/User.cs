@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace WebApiCiCd.Models
 {
     public class User
@@ -5,6 +7,6 @@ namespace WebApiCiCd.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        [JsonIgnore] public string Password { get; set; }
     }
 }
