@@ -1,3 +1,4 @@
+using System.Linq;
 using WebApiCiCd.Models;
 
 namespace WebApiCiCd.Data
@@ -17,6 +18,16 @@ namespace WebApiCiCd.Data
             user.Id = _context.SaveChanges();
 
             return user;
+        }
+
+        public User GetByEmail(string email)
+        {
+            return _context.Users.FirstOrDefault(usr => usr.Email == email);
+        }
+
+        public User GetById(int id)
+        {
+            return _context.Users.FirstOrDefault(usr => usr.Id == id);
         }
     }
 }
