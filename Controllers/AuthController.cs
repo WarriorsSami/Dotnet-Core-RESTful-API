@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApiCiCd.Data;
@@ -12,6 +13,7 @@ namespace WebApiCiCd.Controllers
     [ApiController]
     public class AuthController: Controller
     {
+        #region Constructor
         private readonly IUserRepository _repository;
         private readonly JwtService _jwtService;
 
@@ -20,9 +22,11 @@ namespace WebApiCiCd.Controllers
             _repository = repository;
             _jwtService = jwtService;
         }
+        #endregion
 
+        #region Register
         [HttpPost("register")]
-        public IActionResult Register(RegisterDto dto)
+        public async Task<IActionResult> Register(RegisterDto dto)
         {
             var user = new User
             {
@@ -31,13 +35,15 @@ namespace WebApiCiCd.Controllers
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
             };
             
-            return Created("success", _repository.Create(user));
+            return Created("success", await _repository.Create(user));
         }
+        #endregion
 
+        #region Login
         [HttpPost("login")]
-        public IActionResult Login(LoginDto dto)
+        public async Task<IActionResult> Login(LoginDto dto)
         {
-            var user = _repository.GetByEmail(dto.Email);
+            var user = await _repository.GetByEmail(dto.Email);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
                 return BadRequest(new {message = "Invalid Credentials"});
@@ -53,9 +59,11 @@ namespace WebApiCiCd.Controllers
                 message = "success"
             });
         }
+        #endregion
 
+        #region User
         [HttpGet("user")]
-        public IActionResult GetCurrentUser()
+        public async Task<IActionResult> GetCurrentUser()
         {
             try
             {
@@ -63,7 +71,7 @@ namespace WebApiCiCd.Controllers
                 var token = _jwtService.Verify(jwt);
 
                 var userId = int.Parse(token.Issuer);
-                var user = _repository.GetById(userId);
+                var user = await _repository.GetById(userId);
 
                 return Ok(user);
             }
@@ -72,7 +80,9 @@ namespace WebApiCiCd.Controllers
                 return Unauthorized();
             }
         }
-
+        #endregion
+        
+        #region Logout
         [HttpPost("logout")]
         public IActionResult Logout()
         {
@@ -83,5 +93,6 @@ namespace WebApiCiCd.Controllers
                 message = "success"
             });
         }
+        #endregion
     }
 }
