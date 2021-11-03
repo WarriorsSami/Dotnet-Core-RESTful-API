@@ -2,10 +2,10 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApiCiCd.Data;
-using WebApiCiCd.Dtos;
+using WebApiCiCd.Entities;
 using WebApiCiCd.Helpers;
 using WebApiCiCd.Models;
+using WebApiCiCd.Services;
 
 namespace WebApiCiCd.Controllers
 {
@@ -92,6 +92,14 @@ namespace WebApiCiCd.Controllers
             {
                 message = "success"
             });
+        }
+        #endregion
+        
+        #region Users
+        [HttpGet("users")]
+        public async Task<IActionResult> GetUsers()
+        {
+            return Ok(await _repository.GetAll());
         }
         #endregion
     }

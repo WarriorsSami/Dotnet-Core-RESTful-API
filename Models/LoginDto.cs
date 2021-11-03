@@ -1,4 +1,4 @@
-namespace WebApiCiCd.Dtos
+namespace WebApiCiCd.Models
 {
     public class LoginDto
     {

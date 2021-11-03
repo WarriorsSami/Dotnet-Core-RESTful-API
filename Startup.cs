@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApiCiCd.Data;
 using WebApiCiCd.Helpers;
+using WebApiCiCd.Services;
 
 namespace WebApiCiCd
 {

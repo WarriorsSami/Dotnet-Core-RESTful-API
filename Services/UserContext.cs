@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using WebApiCiCd.Models;
+using WebApiCiCd.Entities;
 
 namespace WebApiCiCd.Data
 {

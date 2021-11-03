@@ -1,9 +1,10 @@
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using WebApiCiCd.Models;
+using WebApiCiCd.Data;
+using WebApiCiCd.Entities;
 
-namespace WebApiCiCd.Data
+namespace WebApiCiCd.Services
 {
     public class UserRepository: IUserRepository
     {
@@ -30,6 +31,11 @@ namespace WebApiCiCd.Data
         public async Task<User> GetById(int id)
         {
             return await _context.Users.FirstOrDefaultAsync(usr => usr.Id == id);
+        }
+
+        public async Task<List<User>> GetAll()
+        {
+            return await _context.Users.ToListAsync();
         }
     }
 }
