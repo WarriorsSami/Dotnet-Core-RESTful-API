@@ -99,7 +99,17 @@ namespace WebApiCiCd.Controllers
         [HttpGet("users")]
         public async Task<IActionResult> GetUsers()
         {
-            return Ok(await _repository.GetAll());
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+                _jwtService.Verify(jwt);
+                
+                return Ok(await _repository.GetAll());
+            }
+            catch (Exception)
+            {
+                return Unauthorized();
+            }
         }
         #endregion
     }
